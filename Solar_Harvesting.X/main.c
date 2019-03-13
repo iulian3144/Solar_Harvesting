@@ -1,6 +1,6 @@
 /*
  * File:   main.c
- * Author: georg
+ * Author: Silviu
  *
  * Created on March 13, 2019, 7:35 PM
  */
