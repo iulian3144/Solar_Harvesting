@@ -4,7 +4,7 @@
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/make-project/1">
             <name>Solar_Harvesting</name>
-            <creation-uuid>1d2a722f-71ff-4edf-b8bd-8ecc259230e0</creation-uuid>
+            <creation-uuid>018aa40e-fd6e-4308-88ee-643b5070281f</creation-uuid>
             <make-project-type>0</make-project-type>
             <c-extensions>c</c-extensions>
             <cpp-extensions/>
@@ -13,7 +13,7 @@
             <sourceEncoding>ISO-8859-1</sourceEncoding>
             <make-dep-projects/>
             <sourceRootList>
-                <sourceRootElem>.</sourceRootElem>
+                <sourceRootElem/>
             </sourceRootList>
             <confList>
                 <confElem>

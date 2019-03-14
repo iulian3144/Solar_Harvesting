@@ -16,7 +16,7 @@ float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
 
 void read_Iout(void)
 {
-    ADCON0=0b00001011;
+    ADCON0=0b00001011;//RA2
     __delay_ms(10);
     ADCON0bits.GO=1;
     __delay_ms(100);
@@ -35,7 +35,7 @@ void read_Iout(void)
 
 void read_Uout(void)
 {
-    ADCON0=0b00000111;
+    ADCON0=0b00000111;//RA1
     __delay_ms(10);
     ADCON0bits.GO=1;
     __delay_ms(100);
@@ -50,7 +50,7 @@ void read_Uout(void)
 }
 void read_Uin(void)
 {
-    ADCON0=0b00001111;
+    ADCON0=0b00001111;//RA3
     __delay_ms(10);
     ADCON0bits.GO=1;
     __delay_ms(100);
