@@ -14,7 +14,7 @@ void main(void)
    
     while(1)
     {
-        if(port==0);
+        if(port==0)
         {
             read_Uout();
             port=1;
@@ -23,7 +23,7 @@ void main(void)
             __delay_ms(100);
          }
     
-        if(port==1);
+        if(port==1)
         {   
             read_Iout();
             port=2;
@@ -32,7 +32,7 @@ void main(void)
             __delay_ms(100);
         }
         
-        if(port==2);
+        if(port==2)
         {   
            read_Uin();
             port=0;

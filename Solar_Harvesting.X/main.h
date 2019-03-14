@@ -36,6 +36,7 @@
 #include <pic18f46k22.h>
 #include "bit_config.h"
 #include "config.h"
+#include "lcd_i2c.h"
 #include <math.h>
 #include <stdio.h>
 #include "mppt.h"

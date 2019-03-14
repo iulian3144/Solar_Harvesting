@@ -8,8 +8,7 @@
 #define BGL 0x00
 #define _XTAL_FREQ 64000000
 #include <xc.h>
-#include "i2c_display.h"
-
+#include "lcd_i2c.h"
 unsigned int data;
 
 void Lcd_Port(char data)

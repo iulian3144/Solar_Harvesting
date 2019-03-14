@@ -9,6 +9,7 @@
 #include "config.h"
 #include <pic18f46k22.h>
 #include "bit_config.h"
+#include "lcd_i2c.h"
 
 void config(void)
 {
