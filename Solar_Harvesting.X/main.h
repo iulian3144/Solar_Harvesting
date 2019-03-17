@@ -26,10 +26,6 @@
  * Revision history: 
  */
 
-// This is a guard condition so that contents of this file are not included
-// more than once.  
-#ifndef XC_HEADER_TEMPLATE_H
-#define	XC_HEADER_TEMPLATE_H
 
 #include <xc.h> // include processor files - each processor file is guarded.  
 #define _XTAL_FREQ  64000000
@@ -40,6 +36,7 @@
 #include <math.h>
 #include <stdio.h>
 #include "mppt.h"
+extern float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
 // TODO Insert appropriate #include <>
 
 // TODO Insert C++ class definitions if appropriate
@@ -80,6 +77,3 @@ extern "C" {
 #ifdef	__cplusplus
 }
 #endif /* __cplusplus */
-
-#endif	/* XC_HEADER_TEMPLATE_H */
-

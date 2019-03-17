@@ -89,17 +89,17 @@
 [v _I2C_Write_Display I2C_Write_Display `(v  1 e 1 0 ]
 "5 D:\Github\Solar_Harvesting\Solar_Harvesting.X\main.c
 [v _main main `(v  1 e 1 0 ]
-"20 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
+"21 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
 [v _read_Iout read_Iout `(v  1 e 1 0 ]
-"32
+"33
 [v _write_Iout write_Iout `(v  1 e 1 0 ]
-"43
+"44
 [v _read_Uout read_Uout `(v  1 e 1 0 ]
-"55
+"56
 [v _write_Uout write_Uout `(v  1 e 1 0 ]
-"64
+"65
 [v _read_Uin read_Uin `(v  1 e 1 0 ]
-"86
+"87
 [v _pwm_init pwm_init `(v  1 e 1 0 ]
 "50 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f46k22.h
 [v _ANSELA ANSELA `VEuc  1 e 1 @3896 ]
@@ -186,6 +186,8 @@
 [v _PR2 PR2 `VEuc  1 e 1 @4027 ]
 "13341
 [v _CCP1CON CCP1CON `VEuc  1 e 1 @4029 ]
+"13430
+[v _CCPR1L CCPR1L `VEuc  1 e 1 @4030 ]
 "13470
 [v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
 [s S75 . 1 `uc 1 ADCS 1 0 :3:0 
@@ -297,10 +299,12 @@
 [v __powers_ _powers_ `C[13]d  1 e 52 0 ]
 "39
 [v __npowers_ _npowers_ `C[13]d  1 e 52 0 ]
-"17 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
+"16 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
+[v _boost_pwm boost_pwm `i  1 e 2 0 ]
+"18
 [v _str_V str_V `[8]uc  1 e 8 0 ]
 [v _str_A str_A `[8]uc  1 e 8 0 ]
-"18
+"19
 [v _rez_adc_A rez_adc_A `f  1 e 4 0 ]
 [v _tens_A tens_A `f  1 e 4 0 ]
 [v _Iout Iout `f  1 e 4 0 ]
@@ -311,30 +315,30 @@
 "5 D:\Github\Solar_Harvesting\Solar_Harvesting.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"13
+"12
 [v main@Uin Uin `f  1 a 4 25 ]
 "14
 [v main@port port `i  1 a 2 29 ]
 "53
 } 0
-"55 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
+"56 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
 [v _write_Uout write_Uout `(v  1 e 1 0 ]
 {
-"62
+"63
 } 0
-"32
+"33
 [v _write_Iout write_Iout `(v  1 e 1 0 ]
 {
-"40
+"41
 } 0
 "492 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
 "516
 [v sprintf@fval fval `d  1 a 4 20 ]
-[u S568 . 4 `ul 1 vd 4 0 `d 1 integ 4 0 ]
+[u S571 . 4 `ul 1 vd 4 0 `d 1 integ 4 0 ]
 "526
-[v sprintf@tmpval tmpval `S568  1 a 4 14 ]
+[v sprintf@tmpval tmpval `S571  1 a 4 14 ]
 "528
 [v sprintf@val val `ul  1 a 4 8 ]
 "504
@@ -488,15 +492,15 @@
 [v ___flneg@f1 f1 `d  1 p 4 0 ]
 "20
 } 0
-"43 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
+"44 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
 [v _read_Uout read_Uout `(v  1 e 1 0 ]
 {
-"53
+"54
 } 0
-"64
+"65
 [v _read_Uin read_Uin `(v  1 e 1 0 ]
 {
-"74
+"75
 } 0
 "11 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\sprcdiv.c
 [v ___fldiv __fldiv `(d  1 e 4 0 ]
@@ -518,10 +522,10 @@
 [v ___fldiv@a a `d  1 p 4 4 ]
 "184
 } 0
-"20 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
+"21 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
 [v _read_Iout read_Iout `(v  1 e 1 0 ]
 {
-"30
+"31
 } 0
 "10 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\xxtofl.c
 [v ___xxtofl __xxtofl `(d  1 e 4 0 ]
@@ -541,17 +545,17 @@
 "8 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S857 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S860 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S862 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S865 . 4 `l 1 i 4 0 `d 1 f 4 0 `S857 1 fAsBytes 4 0 `S862 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S865  1 a 4 33 ]
+[s S865 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S868 . 4 `l 1 i 4 0 `d 1 f 4 0 `S860 1 fAsBytes 4 0 `S865 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S868  1 a 4 33 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 27 ]
-[s S933 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S936 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S936 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S933 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S936  1 a 2 37 ]
+[u S939 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S936 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S939  1 a 2 37 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 32 ]
 "11
@@ -563,12 +567,12 @@
 [v ___flmul@a a `d  1 p 4 18 ]
 "205
 } 0
-"86 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
+"87 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
 [v _pwm_init pwm_init `(v  1 e 1 0 ]
 {
-"87
+"88
 [v pwm_init@Uin Uin `f  1 p 4 12 ]
-"92
+"100
 } 0
 "4 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\flge.c
 [v ___flge __flge `(b  1 e 0 0 ]

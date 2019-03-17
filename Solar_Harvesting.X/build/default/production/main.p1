@@ -6775,7 +6775,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mppt.h: 25: void write_Iout(void);
 [; ;mppt.h: 26: void write_Uout(void);
 [; ;mppt.h: 27: void write_Uin(void);
-[; ;mppt.h: 28: void pwm_init(float);
+[; ;mppt.h: 28: void pwm_init(float Uin);
+[; ;main.h: 39: extern float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
 [v $root$_main `(v ~T0 @X0 0 e ]
 "5 main.c
 [v _main `(v ~T0 @X0 1 ef ]
@@ -6800,7 +6801,6 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;main.c: 12: Lcd_Clear();
 "12
 [e ( _Lcd_Clear ..  ]
-"13
 [v _Uin `f ~T0 @X0 1 a ]
 "14
 [v _port `i ~T0 @X0 1 a ]

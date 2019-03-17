@@ -42,6 +42,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
 "194 C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdio.h
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
+"13430 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f46k22.h
+[v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -6736,12 +6738,16 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 190: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 194: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 195: extern int printf(const char *, ...);
-"17 mppt.c
+"16 mppt.c
+[v _buck_pwm `i ~T0 @X0 1 e ]
+[v _boost_pwm `i ~T0 @X0 1 e ]
+[; ;mppt.c: 16: int buck_pwm,boost_pwm;
+"18
 [v _str_V `uc ~T0 @X0 -> 8 `i e ]
 [v _str_A `uc ~T0 @X0 -> 8 `i e ]
 [v _str_P `uc ~T0 @X0 -> 8 `i e ]
-[; ;mppt.c: 17: char str_V[8],str_A[8],str_P[8];
-"18
+[; ;mppt.c: 18: char str_V[8],str_A[8],str_P[8];
+"19
 [v _rez_adc_A `f ~T0 @X0 1 e ]
 [v _tens_A `f ~T0 @X0 1 e ]
 [v _Iout `f ~T0 @X0 1 e ]
@@ -6749,214 +6755,236 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _tens `f ~T0 @X0 1 e ]
 [v _Uout `f ~T0 @X0 1 e ]
 [v _Uin `f ~T0 @X0 1 e ]
-[; ;mppt.c: 18: float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
-"20
-[v _read_Iout `(v ~T0 @X0 1 ef ]
+[; ;mppt.c: 19: float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
 "21
+[v _read_Iout `(v ~T0 @X0 1 ef ]
+"22
 {
-[; ;mppt.c: 20: void read_Iout(void)
-[; ;mppt.c: 21: {
+[; ;mppt.c: 21: void read_Iout(void)
+[; ;mppt.c: 22: {
 [e :U _read_Iout ]
 [f ]
-[; ;mppt.c: 22: ADCON0=0b00001011;
-"22
-[e = _ADCON0 -> -> 11 `i `uc ]
-[; ;mppt.c: 23: _delay((unsigned long)((10)*(64000000/4000.0)));
+[; ;mppt.c: 23: ADCON0=0b00001011;
 "23
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;mppt.c: 24: ADCON0bits.GO=1;
+[e = _ADCON0 -> -> 11 `i `uc ]
+[; ;mppt.c: 24: _delay((unsigned long)((10)*(64000000/4000.0)));
 "24
-[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-[; ;mppt.c: 25: _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;mppt.c: 25: ADCON0bits.GO=1;
 "25
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;mppt.c: 26: rez_adc_A=ADRESH;
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+[; ;mppt.c: 26: _delay((unsigned long)((100)*(64000000/4000.0)));
 "26
-[e = _rez_adc_A -> _ADRESH `f ]
-[; ;mppt.c: 27: tens_A=rez_adc_A*0.0181372549019608;
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;mppt.c: 27: rez_adc_A=ADRESH;
 "27
-[e = _tens_A -> * -> _rez_adc_A `d .0.0181372549019608 `f ]
-[; ;mppt.c: 28: Iout=tens_A;
+[e = _rez_adc_A -> _ADRESH `f ]
+[; ;mppt.c: 28: tens_A=rez_adc_A*0.0181372549019608;
 "28
+[e = _tens_A -> * -> _rez_adc_A `d .0.0181372549019608 `f ]
+[; ;mppt.c: 29: Iout=tens_A;
+"29
 [e = _Iout _tens_A ]
-[; ;mppt.c: 30: }
-"30
+[; ;mppt.c: 31: }
+"31
 [e :UE 850 ]
 }
-"32
-[v _write_Iout `(v ~T0 @X0 1 ef ]
 "33
+[v _write_Iout `(v ~T0 @X0 1 ef ]
+"34
 {
-[; ;mppt.c: 32: void write_Iout(void)
-[; ;mppt.c: 33: {
+[; ;mppt.c: 33: void write_Iout(void)
+[; ;mppt.c: 34: {
 [e :U _write_Iout ]
 [f ]
-[; ;mppt.c: 34: Lcd_Set_Cursor(2,1);
-"34
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-[; ;mppt.c: 35: Lcd_Write_String("I=");
+[; ;mppt.c: 35: Lcd_Set_Cursor(2,1);
 "35
-[e ( _Lcd_Write_String (1 -> :s 1C `*uc ]
-[; ;mppt.c: 36: sprintf(str_A, "%.2f", Iout);
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
+[; ;mppt.c: 36: Lcd_Write_String("I=");
 "36
-[e ( _sprintf (1 , (. , &U _str_A :s 2C -> _Iout `d ]
-[; ;mppt.c: 37: Lcd_Set_Cursor(2,3);
+[e ( _Lcd_Write_String (1 -> :s 1C `*uc ]
+[; ;mppt.c: 37: sprintf(str_A, "%.2f", Iout);
 "37
-[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 3 `i `uc ]
-[; ;mppt.c: 38: Lcd_Write_String(str_A);
+[e ( _sprintf (1 , (. , &U _str_A :s 2C -> _Iout `d ]
+[; ;mppt.c: 38: Lcd_Set_Cursor(2,3);
 "38
-[e ( _Lcd_Write_String (1 &U _str_A ]
-[; ;mppt.c: 39: Lcd_Write_String(" A");
+[e ( _Lcd_Set_Cursor (2 , -> -> 2 `i `uc -> -> 3 `i `uc ]
+[; ;mppt.c: 39: Lcd_Write_String(str_A);
 "39
-[e ( _Lcd_Write_String (1 -> :s 3C `*uc ]
-[; ;mppt.c: 40: }
+[e ( _Lcd_Write_String (1 &U _str_A ]
+[; ;mppt.c: 40: Lcd_Write_String(" A");
 "40
+[e ( _Lcd_Write_String (1 -> :s 3C `*uc ]
+[; ;mppt.c: 41: }
+"41
 [e :UE 851 ]
 }
-"43
-[v _read_Uout `(v ~T0 @X0 1 ef ]
 "44
+[v _read_Uout `(v ~T0 @X0 1 ef ]
+"45
 {
-[; ;mppt.c: 43: void read_Uout(void)
-[; ;mppt.c: 44: {
+[; ;mppt.c: 44: void read_Uout(void)
+[; ;mppt.c: 45: {
 [e :U _read_Uout ]
 [f ]
-[; ;mppt.c: 45: ADCON0=0b00000111;
-"45
-[e = _ADCON0 -> -> 7 `i `uc ]
-[; ;mppt.c: 46: _delay((unsigned long)((10)*(64000000/4000.0)));
+[; ;mppt.c: 46: ADCON0=0b00000111;
 "46
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;mppt.c: 47: ADCON0bits.GO=1;
+[e = _ADCON0 -> -> 7 `i `uc ]
+[; ;mppt.c: 47: _delay((unsigned long)((10)*(64000000/4000.0)));
 "47
-[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-[; ;mppt.c: 48: _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;mppt.c: 48: ADCON0bits.GO=1;
 "48
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;mppt.c: 49: rez_adc_U=ADRESH;
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+[; ;mppt.c: 49: _delay((unsigned long)((100)*(64000000/4000.0)));
 "49
-[e = _rez_adc_U -> _ADRESH `f ]
-[; ;mppt.c: 50: tens=rez_adc_U*0.01953125;
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;mppt.c: 50: rez_adc_U=ADRESH;
 "50
-[e = _tens -> * -> _rez_adc_U `d .0.01953125 `f ]
-[; ;mppt.c: 51: Uout=tens/0.25;
+[e = _rez_adc_U -> _ADRESH `f ]
+[; ;mppt.c: 51: tens=rez_adc_U*0.01953125;
 "51
+[e = _tens -> * -> _rez_adc_U `d .0.01953125 `f ]
+[; ;mppt.c: 52: Uout=tens/0.25;
+"52
 [e = _Uout -> / -> _tens `d .0.25 `f ]
-[; ;mppt.c: 53: }
-"53
+[; ;mppt.c: 54: }
+"54
 [e :UE 852 ]
 }
-"55
-[v _write_Uout `(v ~T0 @X0 1 ef ]
 "56
+[v _write_Uout `(v ~T0 @X0 1 ef ]
+"57
 {
-[; ;mppt.c: 55: void write_Uout(void)
-[; ;mppt.c: 56: {
+[; ;mppt.c: 56: void write_Uout(void)
+[; ;mppt.c: 57: {
 [e :U _write_Uout ]
 [f ]
-[; ;mppt.c: 57: Lcd_Set_Cursor(1,1);
-"57
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
-[; ;mppt.c: 58: Lcd_Write_String("U=");
+[; ;mppt.c: 58: Lcd_Set_Cursor(1,1);
 "58
-[e ( _Lcd_Write_String (1 -> :s 4C `*uc ]
-[; ;mppt.c: 59: sprintf(str_V, "%.2f", Uout);
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
+[; ;mppt.c: 59: Lcd_Write_String("U=");
 "59
-[e ( _sprintf (1 , (. , &U _str_V :s 5C -> _Uout `d ]
-[; ;mppt.c: 60: Lcd_Set_Cursor(1,3);
+[e ( _Lcd_Write_String (1 -> :s 4C `*uc ]
+[; ;mppt.c: 60: sprintf(str_V, "%.2f", Uout);
 "60
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 3 `i `uc ]
-[; ;mppt.c: 61: Lcd_Write_String(str_V);
+[e ( _sprintf (1 , (. , &U _str_V :s 5C -> _Uout `d ]
+[; ;mppt.c: 61: Lcd_Set_Cursor(1,3);
 "61
-[e ( _Lcd_Write_String (1 &U _str_V ]
-[; ;mppt.c: 62: }
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 3 `i `uc ]
+[; ;mppt.c: 62: Lcd_Write_String(str_V);
 "62
+[e ( _Lcd_Write_String (1 &U _str_V ]
+[; ;mppt.c: 63: }
+"63
 [e :UE 853 ]
 }
-"64
-[v _read_Uin `(v ~T0 @X0 1 ef ]
 "65
+[v _read_Uin `(v ~T0 @X0 1 ef ]
+"66
 {
-[; ;mppt.c: 64: void read_Uin(void)
-[; ;mppt.c: 65: {
+[; ;mppt.c: 65: void read_Uin(void)
+[; ;mppt.c: 66: {
 [e :U _read_Uin ]
 [f ]
-[; ;mppt.c: 66: ADCON0=0b00001111;
-"66
-[e = _ADCON0 -> -> 15 `i `uc ]
-[; ;mppt.c: 67: _delay((unsigned long)((10)*(64000000/4000.0)));
+[; ;mppt.c: 67: ADCON0=0b00001111;
 "67
-[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;mppt.c: 68: ADCON0bits.GO=1;
+[e = _ADCON0 -> -> 15 `i `uc ]
+[; ;mppt.c: 68: _delay((unsigned long)((10)*(64000000/4000.0)));
 "68
-[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
-[; ;mppt.c: 69: _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( __delay (1 -> * -> -> 10 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;mppt.c: 69: ADCON0bits.GO=1;
 "69
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;mppt.c: 70: rez_adc_U=ADRESH;
+[e = . . _ADCON0bits 2 1 -> -> 1 `i `uc ]
+[; ;mppt.c: 70: _delay((unsigned long)((100)*(64000000/4000.0)));
 "70
-[e = _rez_adc_U -> _ADRESH `f ]
-[; ;mppt.c: 71: tens=rez_adc_U*0.01953125;
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;mppt.c: 71: rez_adc_U=ADRESH;
 "71
-[e = _tens -> * -> _rez_adc_U `d .0.01953125 `f ]
-[; ;mppt.c: 72: Uin=tens/0.2;
+[e = _rez_adc_U -> _ADRESH `f ]
+[; ;mppt.c: 72: tens=rez_adc_U*0.01953125;
 "72
+[e = _tens -> * -> _rez_adc_U `d .0.01953125 `f ]
+[; ;mppt.c: 73: Uin=tens/0.2;
+"73
 [e = _Uin -> / -> _tens `d .0.2 `f ]
-[; ;mppt.c: 74: }
-"74
+[; ;mppt.c: 75: }
+"75
 [e :UE 854 ]
 }
-"76
-[v _write_Uin `(v ~T0 @X0 1 ef ]
 "77
+[v _write_Uin `(v ~T0 @X0 1 ef ]
+"78
 {
-[; ;mppt.c: 76: void write_Uin(void)
-[; ;mppt.c: 77: {
+[; ;mppt.c: 77: void write_Uin(void)
+[; ;mppt.c: 78: {
 [e :U _write_Uin ]
 [f ]
-[; ;mppt.c: 78: Lcd_Set_Cursor(1,9);
-"78
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 9 `i `uc ]
-[; ;mppt.c: 79: Lcd_Write_String("Ui=");
+[; ;mppt.c: 79: Lcd_Set_Cursor(1,9);
 "79
-[e ( _Lcd_Write_String (1 -> :s 6C `*uc ]
-[; ;mppt.c: 80: sprintf(str_V, "%.2f", Uin);
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 9 `i `uc ]
+[; ;mppt.c: 80: Lcd_Write_String("Ui=");
 "80
-[e ( _sprintf (1 , (. , &U _str_V :s 7C -> _Uin `d ]
-[; ;mppt.c: 81: Lcd_Set_Cursor(1,12);
+[e ( _Lcd_Write_String (1 -> :s 6C `*uc ]
+[; ;mppt.c: 81: sprintf(str_V, "%.2f", Uin);
 "81
-[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 12 `i `uc ]
-[; ;mppt.c: 82: Lcd_Write_String(str_V);
+[e ( _sprintf (1 , (. , &U _str_V :s 7C -> _Uin `d ]
+[; ;mppt.c: 82: Lcd_Set_Cursor(1,12);
 "82
-[e ( _Lcd_Write_String (1 &U _str_V ]
-[; ;mppt.c: 83: Lcd_Write_String(" V");
+[e ( _Lcd_Set_Cursor (2 , -> -> 1 `i `uc -> -> 12 `i `uc ]
+[; ;mppt.c: 83: Lcd_Write_String(str_V);
 "83
-[e ( _Lcd_Write_String (1 -> :s 8C `*uc ]
-[; ;mppt.c: 84: }
+[e ( _Lcd_Write_String (1 &U _str_V ]
+[; ;mppt.c: 84: Lcd_Write_String(" V");
 "84
+[e ( _Lcd_Write_String (1 -> :s 8C `*uc ]
+[; ;mppt.c: 85: }
+"85
 [e :UE 855 ]
 }
-"86
-[v _pwm_init `(v ~T0 @X0 1 ef1`f ]
 "87
+[v _pwm_init `(v ~T0 @X0 1 ef1`f ]
+"88
 {
-[; ;mppt.c: 86: void pwm_init(float Uin)
-[; ;mppt.c: 87: {
+[; ;mppt.c: 87: void pwm_init(float Uin)
+[; ;mppt.c: 88: {
 [e :U _pwm_init ]
 [v _Uin `f ~T0 @X0 1 r1 ]
 [f ]
-[; ;mppt.c: 88: if(Uin>12)
-"88
-[e $ ! > _Uin -> -> 12 `i `f 857  ]
-[; ;mppt.c: 89: {
+[; ;mppt.c: 89: if(Uin>12)
 "89
+[e $ ! > _Uin -> -> 12 `i `f 857  ]
+[; ;mppt.c: 90: {
+"90
 {
+[; ;mppt.c: 91: boost_pwm=0;
 "91
-}
-[e :U 857 ]
-[; ;mppt.c: 91: }
-[; ;mppt.c: 92: }
+[e = _boost_pwm -> 0 `i ]
+[; ;mppt.c: 92: CCPR1L=boost_pwm;
 "92
+[e = _CCPR1L -> _boost_pwm `uc ]
+"94
+}
+[; ;mppt.c: 94: }
+[e $U 858  ]
+"95
+[e :U 857 ]
+[; ;mppt.c: 95: else
+[; ;mppt.c: 96: {
+"96
+{
+[; ;mppt.c: 97: boost_pwm=0;
+"97
+[e = _boost_pwm -> 0 `i ]
+[; ;mppt.c: 98: CCPR1L=boost_pwm;
+"98
+[e = _CCPR1L -> _boost_pwm `uc ]
+"99
+}
+[e :U 858 ]
+[; ;mppt.c: 99: }
+[; ;mppt.c: 100: }
+"100
 [e :UE 856 ]
 }
 [p f _sprintf 8462336 ]

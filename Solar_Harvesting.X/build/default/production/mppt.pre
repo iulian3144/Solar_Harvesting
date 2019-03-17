@@ -8629,7 +8629,9 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 17 "mppt.c"
+# 16 "mppt.c"
+int buck_pwm,boost_pwm;
+
 char str_V[8],str_A[8],str_P[8];
 float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
 
@@ -8703,6 +8705,13 @@ void pwm_init(float Uin)
 {
 if(Uin>12)
 {
+boost_pwm=0;
+CCPR1L=boost_pwm;
 
+}
+else
+{
+boost_pwm=0;
+CCPR1L=boost_pwm;
 }
 }

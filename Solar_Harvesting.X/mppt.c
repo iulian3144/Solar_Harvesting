@@ -11,8 +11,9 @@
 #include "bit_config.h"
 #include "config.h"
 #include <stdio.h>
-#define boost CCPR2L;
-#define buck CCPR1L;
+#define  buck  CCPR2L
+#define  boost CCPR1L
+int buck_pwm,boost_pwm;
 
 char str_V[8],str_A[8],str_P[8];
 float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
@@ -87,6 +88,13 @@ void pwm_init(float Uin)
 {
     if(Uin>12)
     {
-        
+        boost_pwm=0;
+        boost=boost_pwm;
+
+    }
+    else
+    {
+        boost_pwm=0;
+        boost=boost_pwm;
     }
 }
