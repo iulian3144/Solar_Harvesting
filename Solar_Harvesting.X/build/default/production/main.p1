@@ -10,8 +10,14 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _init_io_display `(v ~T0 @X0 0 ef ]
 "47 lcd_i2c.h
 [v _Lcd_Clear `(v ~T0 @X0 0 ef ]
-"23 mppt.h
+"24 mppt.h
+[v _read_Uin `(v ~T0 @X0 0 ef ]
+"28
+[v _pwm_init `(v ~T0 @X0 0 ef1`f ]
+"23
 [v _read_Uout `(v ~T0 @X0 0 ef ]
+"26
+[v _write_Uout `(v ~T0 @X0 0 ef ]
 [v F6949 `(v ~T0 @X0 1 tf1`ul ]
 "164 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18.h
 [v __delay `JF6949 ~T0 @X0 0 e ]
@@ -20,10 +26,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _ADRESH `Vuc ~T0 @X0 0 e@4036 ]
 "22 mppt.h
 [v _read_Iout `(v ~T0 @X0 0 ef ]
-"24
-[v _read_Uin `(v ~T0 @X0 0 ef ]
-"3359 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f46k22.h
-[v _CCPR2L `Vuc ~T0 @X0 0 e@3943 ]
+"25
+[v _write_Iout `(v ~T0 @X0 0 ef ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -6768,132 +6772,143 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mppt.h: 22: void read_Iout(void);
 [; ;mppt.h: 23: void read_Uout(void);
 [; ;mppt.h: 24: void read_Uin(void);
+[; ;mppt.h: 25: void write_Iout(void);
+[; ;mppt.h: 26: void write_Uout(void);
+[; ;mppt.h: 27: void write_Uin(void);
+[; ;mppt.h: 28: void pwm_init(float);
 [v $root$_main `(v ~T0 @X0 0 e ]
-"4 main.c
+"5 main.c
 [v _main `(v ~T0 @X0 1 ef ]
-"5
+"6
 {
-[; ;main.c: 4: void main(void)
-[; ;main.c: 5: {
+[; ;main.c: 5: void main(void)
+[; ;main.c: 6: {
 [e :U _main ]
 [f ]
-[; ;main.c: 7: config();
-"7
-[e ( _config ..  ]
-[; ;main.c: 8: pwm_config();
+[; ;main.c: 8: config();
 "8
-[e ( _pwm_config ..  ]
-[; ;main.c: 9: adc_config();
+[e ( _config ..  ]
+[; ;main.c: 9: pwm_config();
 "9
-[e ( _adc_config ..  ]
-[; ;main.c: 10: init_io_display();
+[e ( _pwm_config ..  ]
+[; ;main.c: 10: adc_config();
 "10
-[e ( _init_io_display ..  ]
-[; ;main.c: 11: Lcd_Clear();
+[e ( _adc_config ..  ]
+[; ;main.c: 11: init_io_display();
 "11
-[e ( _Lcd_Clear ..  ]
+[e ( _init_io_display ..  ]
+[; ;main.c: 12: Lcd_Clear();
 "12
+[e ( _Lcd_Clear ..  ]
+"13
+[v _Uin `f ~T0 @X0 1 a ]
+"14
 [v _port `i ~T0 @X0 1 a ]
 [v _c `i ~T0 @X0 1 a ]
-[; ;main.c: 12: int port,c;
-[; ;main.c: 13: c=50;
-"13
-[e = _c -> 50 `i ]
-[; ;main.c: 14: while(1)
-"14
-[e :U 852 ]
-[; ;main.c: 15: {
+[v _d `i ~T0 @X0 1 a ]
+[; ;main.c: 13: float Uin;
+[; ;main.c: 14: int port,c,d;
+[; ;main.c: 15: read_Uin();
 "15
-{
-[; ;main.c: 16: if(port==0)
+[e ( _read_Uin ..  ]
+[; ;main.c: 16: pwm_init(Uin);
 "16
-[e $ ! == _port -> 0 `i 854  ]
-[; ;main.c: 17: {
-"17
-{
-[; ;main.c: 18: read_Uout();
-"18
-[e ( _read_Uout ..  ]
-[; ;main.c: 19: port=1;
+[e ( _pwm_init (1 _Uin ]
+[; ;main.c: 19: while(1)
 "19
-[e = _port -> 1 `i ]
-[; ;main.c: 20: _delay((unsigned long)((100)*(64000000/4000.0)));
+[e :U 852 ]
+[; ;main.c: 20: {
 "20
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 21: ADRESH=0X00;
+{
+[; ;main.c: 21: if(port==0)
 "21
-[e = _ADRESH -> -> 0 `i `uc ]
-[; ;main.c: 22: _delay((unsigned long)((100)*(64000000/4000.0)));
+[e $ ! == _port -> 0 `i 854  ]
+[; ;main.c: 22: {
 "22
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+{
+[; ;main.c: 23: read_Uout();
 "23
+[e ( _read_Uout ..  ]
+[; ;main.c: 24: write_Uout();
+"24
+[e ( _write_Uout ..  ]
+[; ;main.c: 25: port=1;
+"25
+[e = _port -> 1 `i ]
+[; ;main.c: 26: _delay((unsigned long)((100)*(64000000/4000.0)));
+"26
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;main.c: 27: ADRESH=0X00;
+"27
+[e = _ADRESH -> -> 0 `i `uc ]
+[; ;main.c: 28: _delay((unsigned long)((100)*(64000000/4000.0)));
+"28
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"29
 }
 [e :U 854 ]
-[; ;main.c: 23: }
-[; ;main.c: 25: if(port==1)
-"25
-[e $ ! == _port -> 1 `i 855  ]
-[; ;main.c: 26: {
-"26
-{
-[; ;main.c: 27: read_Iout();
-"27
-[e ( _read_Iout ..  ]
-[; ;main.c: 28: port=2;
-"28
-[e = _port -> 2 `i ]
-[; ;main.c: 29: _delay((unsigned long)((100)*(64000000/4000.0)));
-"29
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 30: ADRESH=0X00;
-"30
-[e = _ADRESH -> -> 0 `i `uc ]
-[; ;main.c: 31: _delay((unsigned long)((100)*(64000000/4000.0)));
+[; ;main.c: 29: }
+[; ;main.c: 31: if(port==1)
 "31
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[e $ ! == _port -> 1 `i 855  ]
+[; ;main.c: 32: {
 "32
-}
-[e :U 855 ]
-[; ;main.c: 32: }
-[; ;main.c: 34: if(port==2)
-"34
-[e $ ! == _port -> 2 `i 856  ]
-[; ;main.c: 35: {
-"35
 {
-[; ;main.c: 36: read_Uin();
+[; ;main.c: 33: read_Iout();
+"33
+[e ( _read_Iout ..  ]
+[; ;main.c: 34: write_Iout();
+"34
+[e ( _write_Iout ..  ]
+[; ;main.c: 35: port=2;
+"35
+[e = _port -> 2 `i ]
+[; ;main.c: 36: _delay((unsigned long)((100)*(64000000/4000.0)));
 "36
-[e ( _read_Uin ..  ]
-[; ;main.c: 37: port=0;
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;main.c: 37: ADRESH=0X00;
 "37
-[e = _port -> 0 `i ]
+[e = _ADRESH -> -> 0 `i `uc ]
 [; ;main.c: 38: _delay((unsigned long)((100)*(64000000/4000.0)));
 "38
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 39: ADRESH=0X00;
 "39
-[e = _ADRESH -> -> 0 `i `uc ]
-[; ;main.c: 40: _delay((unsigned long)((100)*(64000000/4000.0)));
-"40
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+}
+[e :U 855 ]
+[; ;main.c: 39: }
+[; ;main.c: 41: if(port==2)
 "41
+[e $ ! == _port -> 2 `i 856  ]
+[; ;main.c: 42: {
+"42
+{
+[; ;main.c: 43: read_Uin();
+"43
+[e ( _read_Uin ..  ]
+[; ;main.c: 44: port=0;
+"44
+[e = _port -> 0 `i ]
+[; ;main.c: 45: _delay((unsigned long)((100)*(64000000/4000.0)));
+"45
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;main.c: 46: ADRESH=0X00;
+"46
+[e = _ADRESH -> -> 0 `i `uc ]
+[; ;main.c: 47: _delay((unsigned long)((100)*(64000000/4000.0)));
+"47
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"48
 }
 [e :U 856 ]
-[; ;main.c: 41: }
-[; ;main.c: 43: c=100;
-"43
-[e = _c -> 100 `i ]
-[; ;main.c: 45: CCPR2L=c;
-"45
-[e = _CCPR2L -> _c `uc ]
-"51
+"52
 }
 [e :U 851 ]
-"14
+"19
 [e $U 852  ]
 [e :U 853 ]
-[; ;main.c: 51: }
+[; ;main.c: 48: }
 [; ;main.c: 52: }
-"52
+[; ;main.c: 53: }
+"53
 [e :UE 850 ]
 }

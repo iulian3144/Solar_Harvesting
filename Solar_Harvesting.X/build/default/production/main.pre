@@ -8687,8 +8687,12 @@ extern int printf(const char *, ...);
 void read_Iout(void);
 void read_Uout(void);
 void read_Uin(void);
+void write_Iout(void);
+void write_Uout(void);
+void write_Uin(void);
+void pwm_init(float);
 
-# 4 "main.c"
+# 5 "main.c"
 void main(void)
 {
 
@@ -8697,13 +8701,18 @@ pwm_config();
 adc_config();
 init_io_display();
 Lcd_Clear();
-int port,c;
-c=50;
+float Uin;
+int port,c,d;
+read_Uin();
+pwm_init(Uin);
+
+
 while(1)
 {
 if(port==0)
 {
 read_Uout();
+write_Uout();
 port=1;
 _delay((unsigned long)((100)*(64000000/4000.0)));
 ADRESH=0X00;
@@ -8713,6 +8722,7 @@ _delay((unsigned long)((100)*(64000000/4000.0)));
 if(port==1)
 {
 read_Iout();
+write_Iout();
 port=2;
 _delay((unsigned long)((100)*(64000000/4000.0)));
 ADRESH=0X00;
@@ -8728,10 +8738,7 @@ ADRESH=0X00;
 _delay((unsigned long)((100)*(64000000/4000.0)));
 }
 
-c=100;
 
-CCPR2L=c;
 
-# 51
 }
 }

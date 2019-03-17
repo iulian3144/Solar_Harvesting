@@ -22,3 +22,7 @@
 void read_Iout(void);
 void read_Uout(void);
 void read_Uin(void);
+void write_Iout(void);
+void write_Uout(void);
+void write_Uin(void);
+void pwm_init(float);

@@ -7,9 +7,12 @@
 
 
 #include <xc.h>
+#include <pic18f46k22.h>
 #include "bit_config.h"
 #include "config.h"
 #include <stdio.h>
+#define boost CCPR2L;
+#define buck CCPR1L;
 
 char str_V[8],str_A[8],str_P[8];
 float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
@@ -23,6 +26,11 @@ void read_Iout(void)
     rez_adc_A=ADRESH;
     tens_A=rez_adc_A*0.0181372549019608;
     Iout=tens_A;
+    
+}
+
+void write_Iout(void)
+{
     Lcd_Set_Cursor(2,1);
     Lcd_Write_String("I=");
     sprintf(str_A, "%.2f", Iout);
@@ -30,7 +38,6 @@ void read_Iout(void)
     Lcd_Write_String(str_A);
     Lcd_Write_String(" A");
 }
-
 
 
 void read_Uout(void)
@@ -42,12 +49,18 @@ void read_Uout(void)
     rez_adc_U=ADRESH;
     tens=rez_adc_U*0.01953125;
     Uout=tens/0.25;
+
+}
+
+void write_Uout(void)
+{
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String("U=");
     sprintf(str_V, "%.2f", Uout);
     Lcd_Set_Cursor(1,3);
     Lcd_Write_String(str_V);
 }
+
 void read_Uin(void)
 {
     ADCON0=0b00001111;//RA3
@@ -57,10 +70,23 @@ void read_Uin(void)
     rez_adc_U=ADRESH;
     tens=rez_adc_U*0.01953125;
     Uin=tens/0.2;
+   
+}
+
+void write_Uin(void)
+{
     Lcd_Set_Cursor(1,9);
     Lcd_Write_String("Ui=");
     sprintf(str_V, "%.2f", Uin);
     Lcd_Set_Cursor(1,12);
     Lcd_Write_String(str_V);
     Lcd_Write_String(" V");
+}
+
+void pwm_init(float Uin)
+{
+    if(Uin>12)
+    {
+        
+    }
 }
