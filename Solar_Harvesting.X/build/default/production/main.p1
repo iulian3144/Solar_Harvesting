@@ -33,7 +33,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 "39 main.h
 [v _Uout `f ~T0 @X0 0 e ]
 [v _Iout `f ~T0 @X0 0 e ]
-"3359 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f46k22.h
+"13430 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f46k22.h
+[v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
+"3359
 [v _CCPR2L `Vuc ~T0 @X0 0 e@3943 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
@@ -6826,177 +6828,253 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _boost_pwm `i ~T0 @X0 1 a ]
 [; ;main.c: 17: float Uin,Power,Power_new;
 [; ;main.c: 18: int port,c,d,buck_pwm,boost_pwm;
-[; ;main.c: 21: while(1)
-"21
-[e :U 852 ]
-[; ;main.c: 22: {
+[; ;main.c: 19: buck_pwm=50;
+"19
+[e = _buck_pwm -> 50 `i ]
+[; ;main.c: 22: while(1)
 "22
-{
-[; ;main.c: 23: if(port==0)
+[e :U 852 ]
+[; ;main.c: 23: {
 "23
-[e $ ! == _port -> 0 `i 854  ]
-[; ;main.c: 24: {
-"24
 {
-[; ;main.c: 25: read_Uout();
+[; ;main.c: 24: if(port==0)
+"24
+[e $ ! == _port -> 0 `i 854  ]
+[; ;main.c: 25: {
 "25
-[e ( _read_Uout ..  ]
-[; ;main.c: 26: write_Uout();
+{
+[; ;main.c: 26: read_Uout();
 "26
-[e ( _write_Uout ..  ]
-[; ;main.c: 27: port=1;
+[e ( _read_Uout ..  ]
+[; ;main.c: 27: write_Uout();
 "27
-[e = _port -> 1 `i ]
-[; ;main.c: 28: _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( _write_Uout ..  ]
+[; ;main.c: 28: port=1;
 "28
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 29: ADRESH=0X00;
+[e = _port -> 1 `i ]
+[; ;main.c: 29: _delay((unsigned long)((100)*(64000000/4000.0)));
 "29
-[e = _ADRESH -> -> 0 `i `uc ]
-[; ;main.c: 30: _delay((unsigned long)((100)*(64000000/4000.0)));
-"30
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;main.c: 30: ADRESH=0X00;
+"30
+[e = _ADRESH -> -> 0 `i `uc ]
+[; ;main.c: 31: _delay((unsigned long)((100)*(64000000/4000.0)));
 "31
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"32
 }
 [e :U 854 ]
-[; ;main.c: 31: }
-[; ;main.c: 33: if(port==1)
-"33
-[e $ ! == _port -> 1 `i 855  ]
-[; ;main.c: 34: {
+[; ;main.c: 32: }
+[; ;main.c: 34: if(port==1)
 "34
-{
-[; ;main.c: 35: read_Iout();
+[e $ ! == _port -> 1 `i 855  ]
+[; ;main.c: 35: {
 "35
-[e ( _read_Iout ..  ]
-[; ;main.c: 36: write_Iout();
+{
+[; ;main.c: 36: read_Iout();
 "36
-[e ( _write_Iout ..  ]
-[; ;main.c: 37: port=2;
+[e ( _read_Iout ..  ]
+[; ;main.c: 37: write_Iout();
 "37
-[e = _port -> 2 `i ]
-[; ;main.c: 38: _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( _write_Iout ..  ]
+[; ;main.c: 38: port=2;
 "38
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 39: ADRESH=0X00;
+[e = _port -> 2 `i ]
+[; ;main.c: 39: _delay((unsigned long)((100)*(64000000/4000.0)));
 "39
-[e = _ADRESH -> -> 0 `i `uc ]
-[; ;main.c: 40: _delay((unsigned long)((100)*(64000000/4000.0)));
-"40
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;main.c: 40: ADRESH=0X00;
+"40
+[e = _ADRESH -> -> 0 `i `uc ]
+[; ;main.c: 41: _delay((unsigned long)((100)*(64000000/4000.0)));
 "41
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"42
 }
 [e :U 855 ]
-[; ;main.c: 41: }
-[; ;main.c: 43: if(port==2)
-"43
-[e $ ! == _port -> 2 `i 856  ]
-[; ;main.c: 44: {
+[; ;main.c: 42: }
+[; ;main.c: 44: if(port==2)
 "44
-{
-[; ;main.c: 45: read_Uin();
+[e $ ! == _port -> 2 `i 856  ]
+[; ;main.c: 45: {
 "45
-[e ( _read_Uin ..  ]
-[; ;main.c: 46: port=0;
+{
+[; ;main.c: 46: read_Uin();
 "46
-[e = _port -> 0 `i ]
-[; ;main.c: 47: _delay((unsigned long)((100)*(64000000/4000.0)));
+[e ( _read_Uin ..  ]
+[; ;main.c: 47: port=0;
 "47
-[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
-[; ;main.c: 48: ADRESH=0X00;
+[e = _port -> 0 `i ]
+[; ;main.c: 48: _delay((unsigned long)((100)*(64000000/4000.0)));
 "48
-[e = _ADRESH -> -> 0 `i `uc ]
-[; ;main.c: 49: _delay((unsigned long)((100)*(64000000/4000.0)));
-"49
 [e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+[; ;main.c: 49: ADRESH=0X00;
+"49
+[e = _ADRESH -> -> 0 `i `uc ]
+[; ;main.c: 50: _delay((unsigned long)((100)*(64000000/4000.0)));
 "50
+[e ( __delay (1 -> * -> -> 100 `i `d / -> -> 64000000 `l `d .4000.0 `ul ]
+"51
 }
 [e :U 856 ]
-[; ;main.c: 50: }
-[; ;main.c: 52: Power=Uout*Iout;
-"52
+[; ;main.c: 51: }
+[; ;main.c: 53: Power=Uout*Iout;
+"53
 [e = _Power * _Uout _Iout ]
-[; ;main.c: 54: if(Uin>12)
-"54
-[e $ ! > _Uin -> -> 12 `i `f 857  ]
-[; ;main.c: 55: {
+[; ;main.c: 55: if(Uin>12)
 "55
-{
-[; ;main.c: 56: boost_pwm=0;
+[e $ ! > _Uin -> -> 12 `i `f 857  ]
+[; ;main.c: 56: {
 "56
-[e = _boost_pwm -> 0 `i ]
-[; ;main.c: 57: CCPR2L=buck_pwm++;
+{
+[; ;main.c: 57: CCPR1L=0;
 "57
-[e = _CCPR2L -> ++ _buck_pwm -> 1 `i `uc ]
-[; ;main.c: 58: read_Iout();
+[e = _CCPR1L -> -> 0 `i `uc ]
+[; ;main.c: 58: CCPR2L=buck_pwm++;
 "58
-[e ( _read_Iout ..  ]
-[; ;main.c: 59: read_Uout();
+[e = _CCPR2L -> ++ _buck_pwm -> 1 `i `uc ]
+[; ;main.c: 59: read_Iout();
 "59
-[e ( _read_Uout ..  ]
-[; ;main.c: 60: Power_new=Uout*Iout;
-"60
-[e = _Power_new * _Uout _Iout ]
-[; ;main.c: 61: if(Power_new>Power)
-"61
-[e $ ! > _Power_new _Power 858  ]
-[; ;main.c: 62: {
-"62
-{
-[; ;main.c: 63: Power=Power_new;
-"63
-[e = _Power _Power_new ]
-"64
-}
-[; ;main.c: 64: }
-[e $U 859  ]
-"65
-[e :U 858 ]
-[; ;main.c: 65: else
-[; ;main.c: 66: {
-"66
-{
-[; ;main.c: 67: CCPR2L=boost_pwm-2;
-"67
-[e = _CCPR2L -> - _boost_pwm -> 2 `i `uc ]
-[; ;main.c: 68: read_Iout();
-"68
 [e ( _read_Iout ..  ]
-[; ;main.c: 69: read_Uout();
-"69
+[; ;main.c: 60: read_Uout();
+"60
 [e ( _read_Uout ..  ]
-[; ;main.c: 70: Power_new=Uout*Iout;
-"70
+[; ;main.c: 61: Power_new=Uout*Iout;
+"61
 [e = _Power_new * _Uout _Iout ]
-[; ;main.c: 71: if(Power_new>Power)
-"71
-[e $ ! > _Power_new _Power 860  ]
-[; ;main.c: 72: {
-"72
+[; ;main.c: 62: if(Power_new>Power)
+"62
+[e $ ! > _Power_new _Power 858  ]
+[; ;main.c: 63: {
+"63
 {
-[; ;main.c: 73: Power=Power_new;
-"73
+[; ;main.c: 64: Power=Power_new;
+"64
 [e = _Power _Power_new ]
-"74
+"65
 }
-[e :U 860 ]
+[; ;main.c: 65: }
+[e $U 859  ]
+"66
+[e :U 858 ]
+[; ;main.c: 66: else
+[; ;main.c: 67: {
+"67
+{
+[; ;main.c: 68: CCPR2L=buck_pwm-2;
+"68
+[e = _CCPR2L -> - _buck_pwm -> 2 `i `uc ]
+[; ;main.c: 69: read_Iout();
+"69
+[e ( _read_Iout ..  ]
+[; ;main.c: 70: read_Uout();
+"70
+[e ( _read_Uout ..  ]
+[; ;main.c: 71: Power_new=Uout*Iout;
+"71
+[e = _Power_new * _Uout _Iout ]
+[; ;main.c: 72: if(Power_new>Power)
+"72
+[e $ ! > _Power_new _Power 860  ]
+[; ;main.c: 73: {
+"73
+{
+[; ;main.c: 74: Power=Power_new;
+"74
+[e = _Power _Power_new ]
 "75
 }
-[e :U 859 ]
+[e :U 860 ]
 "76
 }
-[e :U 857 ]
+[e :U 859 ]
 "77
 }
-[e :U 851 ]
-"21
-[e $U 852  ]
-[e :U 853 ]
-[; ;main.c: 74: }
+[e :U 857 ]
 [; ;main.c: 75: }
 [; ;main.c: 76: }
 [; ;main.c: 77: }
-[; ;main.c: 78: }
-"78
+[; ;main.c: 79: if(Uin<=12)
+"79
+[e $ ! <= _Uin -> -> 12 `i `f 861  ]
+[; ;main.c: 80: {
+"80
+{
+[; ;main.c: 81: CCPR2L=128;
+"81
+[e = _CCPR2L -> -> 128 `i `uc ]
+[; ;main.c: 82: CCPR1L=boost_pwm++;
+"82
+[e = _CCPR1L -> ++ _boost_pwm -> 1 `i `uc ]
+[; ;main.c: 83: read_Iout();
+"83
+[e ( _read_Iout ..  ]
+[; ;main.c: 84: read_Uout();
+"84
+[e ( _read_Uout ..  ]
+[; ;main.c: 85: Power_new=Uout*Iout;
+"85
+[e = _Power_new * _Uout _Iout ]
+[; ;main.c: 86: if(Power_new>Power)
+"86
+[e $ ! > _Power_new _Power 862  ]
+[; ;main.c: 87: {
+"87
+{
+[; ;main.c: 88: Power=Power_new;
+"88
+[e = _Power _Power_new ]
+"89
+}
+[; ;main.c: 89: }
+[e $U 863  ]
+"90
+[e :U 862 ]
+[; ;main.c: 90: else
+[; ;main.c: 91: {
+"91
+{
+[; ;main.c: 92: CCPR1L=boost_pwm-2;
+"92
+[e = _CCPR1L -> - _boost_pwm -> 2 `i `uc ]
+[; ;main.c: 93: read_Iout();
+"93
+[e ( _read_Iout ..  ]
+[; ;main.c: 94: read_Uout();
+"94
+[e ( _read_Uout ..  ]
+[; ;main.c: 95: Power_new=Uout*Iout;
+"95
+[e = _Power_new * _Uout _Iout ]
+[; ;main.c: 96: if(Power_new>Power)
+"96
+[e $ ! > _Power_new _Power 864  ]
+[; ;main.c: 97: {
+"97
+{
+[; ;main.c: 98: Power=Power_new;
+"98
+[e = _Power _Power_new ]
+"99
+}
+[e :U 864 ]
+"100
+}
+[e :U 863 ]
+"101
+}
+[e :U 861 ]
+"102
+}
+[e :U 851 ]
+"22
+[e $U 852  ]
+[e :U 853 ]
+[; ;main.c: 99: }
+[; ;main.c: 100: }
+[; ;main.c: 101: }
+[; ;main.c: 102: }
+[; ;main.c: 103: }
+"103
 [e :UE 850 ]
 }

@@ -188,6 +188,8 @@
 [v _PR2 PR2 `VEuc  1 e 1 @4027 ]
 "13341
 [v _CCP1CON CCP1CON `VEuc  1 e 1 @4029 ]
+"13430
+[v _CCPR1L CCPR1L `VEuc  1 e 1 @4030 ]
 "13470
 [v _ADCON2 ADCON2 `VEuc  1 e 1 @4032 ]
 [s S75 . 1 `uc 1 ADCS 1 0 :3:0 
@@ -209,15 +211,15 @@
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 "13609
 [v _ADCON0 ADCON0 `VEuc  1 e 1 @4034 ]
-[s S420 . 1 `uc 1 . 1 0 :1:0 
+[s S421 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_NOT_DONE 1 0 :1:1 
 ]
 "13654
-[s S423 . 1 `uc 1 ADON 1 0 :1:0 
+[s S424 . 1 `uc 1 ADON 1 0 :1:0 
 `uc 1 GO_nDONE 1 0 :1:1 
 `uc 1 CHS 1 0 :5:2 
 ]
-[s S427 . 1 `uc 1 . 1 0 :1:0 
+[s S428 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO 1 0 :1:1 
 `uc 1 CHS0 1 0 :1:2 
 `uc 1 CHS1 1 0 :1:3 
@@ -225,23 +227,23 @@
 `uc 1 CHS3 1 0 :1:5 
 `uc 1 CHS4 1 0 :1:6 
 ]
-[s S435 . 1 `uc 1 . 1 0 :1:0 
+[s S436 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 DONE 1 0 :1:1 
 ]
-[s S438 . 1 `uc 1 . 1 0 :1:0 
+[s S439 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 NOT_DONE 1 0 :1:1 
 ]
-[s S441 . 1 `uc 1 . 1 0 :1:0 
+[s S442 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 nDONE 1 0 :1:1 
 ]
-[s S444 . 1 `uc 1 . 1 0 :1:0 
+[s S445 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GO_DONE 1 0 :1:1 
 ]
-[s S447 . 1 `uc 1 . 1 0 :1:0 
+[s S448 . 1 `uc 1 . 1 0 :1:0 
 `uc 1 GODONE 1 0 :1:1 
 ]
-[u S450 . 1 `S420 1 . 1 0 `S423 1 . 1 0 `S427 1 . 1 0 `S435 1 . 1 0 `S438 1 . 1 0 `S441 1 . 1 0 `S444 1 . 1 0 `S447 1 . 1 0 ]
-[v _ADCON0bits ADCON0bits `VES450  1 e 1 @4034 ]
+[u S451 . 1 `S421 1 . 1 0 `S424 1 . 1 0 `S428 1 . 1 0 `S436 1 . 1 0 `S439 1 . 1 0 `S442 1 . 1 0 `S445 1 . 1 0 `S448 1 . 1 0 ]
+[v _ADCON0bits ADCON0bits `VES451  1 e 1 @4034 ]
 "13761
 [v _ADRESH ADRESH `VEuc  1 e 1 @4036 ]
 "13781
@@ -317,14 +319,14 @@
 {
 "17
 [v main@Power_new Power_new `f  1 a 4 39 ]
-[v main@Power Power `f  1 a 4 33 ]
+[v main@Power Power `f  1 a 4 35 ]
 "16
 [v main@Uin Uin `f  1 a 4 25 ]
 "18
-[v main@port port `i  1 a 2 37 ]
-[v main@boost_pwm boost_pwm `i  1 a 2 31 ]
-[v main@buck_pwm buck_pwm `i  1 a 2 29 ]
-"78
+[v main@port port `i  1 a 2 33 ]
+[v main@buck_pwm buck_pwm `i  1 a 2 31 ]
+[v main@boost_pwm boost_pwm `i  1 a 2 29 ]
+"103
 } 0
 "56 D:\Github\Solar_Harvesting\Solar_Harvesting.X\mppt.c
 [v _write_Uout write_Uout `(v  1 e 1 0 ]
@@ -341,9 +343,9 @@
 {
 "516
 [v sprintf@fval fval `d  1 a 4 20 ]
-[u S579 . 4 `ul 1 vd 4 0 `d 1 integ 4 0 ]
+[u S580 . 4 `ul 1 vd 4 0 `d 1 integ 4 0 ]
 "526
-[v sprintf@tmpval tmpval `S579  1 a 4 14 ]
+[v sprintf@tmpval tmpval `S580  1 a 4 14 ]
 "528
 [v sprintf@val val `ul  1 a 4 8 ]
 "504
@@ -550,17 +552,17 @@
 "8 C:\Program Files (x86)\Microchip\xc8\v1.44\sources\common\sprcmul.c
 [v ___flmul __flmul `(d  1 e 4 0 ]
 {
-[s S868 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
+[s S869 . 4 `uc 1 a 1 0 `uc 1 b 1 1 `uc 1 c 1 2 `uc 1 d 1 3 ]
 "13
-[s S873 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
-[u S876 . 4 `l 1 i 4 0 `d 1 f 4 0 `S868 1 fAsBytes 4 0 `S873 1 fAsWords 4 0 ]
-[v ___flmul@prod prod `S876  1 a 4 33 ]
+[s S874 . 4 `i 1 wordA 2 0 `i 1 wordB 2 2 ]
+[u S877 . 4 `l 1 i 4 0 `d 1 f 4 0 `S869 1 fAsBytes 4 0 `S874 1 fAsWords 4 0 ]
+[v ___flmul@prod prod `S877  1 a 4 33 ]
 "12
 [v ___flmul@grs grs `ul  1 a 4 27 ]
-[s S944 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
+[s S945 . 2 `uc 1 a 1 0 `uc 1 b 1 1 ]
 "14
-[u S947 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S944 1 nAsBytes 2 0 ]
-[v ___flmul@temp temp `S947  1 a 2 37 ]
+[u S948 . 2 `i 1 i 2 0 `ui 1 n 2 0 `S945 1 nAsBytes 2 0 ]
+[v ___flmul@temp temp `S948  1 a 2 37 ]
 "10
 [v ___flmul@bexp bexp `uc  1 a 1 32 ]
 "11

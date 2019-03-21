@@ -16,6 +16,7 @@ void main(void)
     pwm_init(Uin);
     float Uin,Power,Power_new;
     int port,c,d,buck_pwm,boost_pwm;
+    buck_pwm=50;
 
     
     while(1)
@@ -49,11 +50,11 @@ void main(void)
             __delay_ms(100);
         }
 
-    Power=Uout*Iout;
+        Power=Uout*Iout;
 
-    if(Uin>12)//functia de MPPT pentru regimul de buck
+        if(Uin>12)//functia de MPPT pentru regimul de buck
         {
-            boost_pwm=0;
+            boost=0;
             buck=buck_pwm++;
             read_Iout();
             read_Uout();
@@ -64,7 +65,7 @@ void main(void)
             }
             else
             {
-                buck=boost_pwm-2;
+                buck=buck_pwm-2;
                 read_Iout();
                 read_Uout();
                 Power_new=Uout*Iout;
@@ -72,6 +73,30 @@ void main(void)
                 {
                     Power=Power_new;
                 }
+            }
+        }
+        
+        if(Uin<=12)//functia de MPPT pentru regimul de boost
+        {
+            buck=128;//80%
+            boost=boost_pwm++;
+            read_Iout();
+            read_Uout();
+            Power_new=Uout*Iout;
+            if(Power_new>Power)
+            {
+                 Power=Power_new;
+            }
+            else
+            {
+                boost=boost_pwm-2;
+                read_Iout();
+                read_Uout();
+                Power_new=Uout*Iout;
+                if(Power_new>Power)
+                {
+                Power=Power_new;
+                }   
             }
         }
     }
