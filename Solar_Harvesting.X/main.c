@@ -1,19 +1,21 @@
 #include "main.h"
+#define  buck  CCPR2L
+#define  boost CCPR1L
 
 
 
 void main(void)
 {
-    
+   
     config();
     pwm_config();
     adc_config();
     init_io_display();
-    Lcd_Clear();
-    float Uin;
-    int port,c,d;
+    Lcd_Clear(); 
     read_Uin();
     pwm_init(Uin);
+    float Uin,Power,Power_new;
+    int port,c,d;
 
     
     while(1)
@@ -46,8 +48,36 @@ void main(void)
             ADRESH=0X00;
             __delay_ms(100);
         }
-   
-//Power=Uout*Iout;
+
+Power=Uout*Iout;
+
+if(Uin>12)
+    {
+        boost_pwm=0;
+        buck=buck_pwm++;
+        read_Iout();
+        read_Uout();
+        Power_new=Uout*Iout;
+        if(Power_new>Power)
+        {
+            Power=Power_new;
+        }
+        else
+        {
+            buck=boost_pwm-2;
+            read_Iout();
+            read_Uout();
+            Power_new=Uout*Iout;
+            if(Power_new>Power)
+            {
+            Power=Power_new;
+            }
+            else
+            {
+            
+            }
+        }
+    }
 
     }
 }

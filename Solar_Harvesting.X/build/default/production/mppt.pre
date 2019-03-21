@@ -8706,12 +8706,11 @@ void pwm_init(float Uin)
 if(Uin>12)
 {
 boost_pwm=0;
-CCPR1L=boost_pwm;
+CCPR2L=boost_pwm;
 
 }
 else
 {
-boost_pwm=0;
-CCPR1L=boost_pwm;
+
 }
 }

@@ -42,8 +42,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [v _Lcd_Write_String `(v ~T0 @X0 0 ef1`*uc ]
 "194 C:\Program Files (x86)\Microchip\xc8\v1.44\include\stdio.h
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"13430 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f46k22.h
-[v _CCPR1L `Vuc ~T0 @X0 0 e@4030 ]
+"3359 C:\Program Files (x86)\Microchip\xc8\v1.44\include\pic18f46k22.h
+[v _CCPR2L `Vuc ~T0 @X0 0 e@3943 ]
 [; ;htc.h: 26: extern const char __xc8_OPTIM_SPEED;
 [; ;htc.h: 28: extern double __fpnormalize(double);
 [; ;xc8debug.h: 14: extern void __builtin_software_breakpoint(void);
@@ -6960,9 +6960,9 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mppt.c: 91: boost_pwm=0;
 "91
 [e = _boost_pwm -> 0 `i ]
-[; ;mppt.c: 92: CCPR1L=boost_pwm;
+[; ;mppt.c: 92: CCPR2L=boost_pwm;
 "92
-[e = _CCPR1L -> _boost_pwm `uc ]
+[e = _CCPR2L -> _boost_pwm `uc ]
 "94
 }
 [; ;mppt.c: 94: }
@@ -6973,18 +6973,12 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;mppt.c: 96: {
 "96
 {
-[; ;mppt.c: 97: boost_pwm=0;
-"97
-[e = _boost_pwm -> 0 `i ]
-[; ;mppt.c: 98: CCPR1L=boost_pwm;
 "98
-[e = _CCPR1L -> _boost_pwm `uc ]
-"99
 }
 [e :U 858 ]
+[; ;mppt.c: 98: }
 [; ;mppt.c: 99: }
-[; ;mppt.c: 100: }
-"100
+"99
 [e :UE 856 ]
 }
 [p f _sprintf 8462336 ]

@@ -8695,7 +8695,7 @@ void pwm_init(float Uin);
 # 39 "main.h"
 extern float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
 
-# 5 "main.c"
+# 7 "main.c"
 void main(void)
 {
 
@@ -8704,10 +8704,10 @@ pwm_config();
 adc_config();
 init_io_display();
 Lcd_Clear();
-float Uin;
-int port,c,d;
 read_Uin();
 pwm_init(Uin);
+float Uin,Power,Power_new;
+int port,c,d;
 
 
 while(1)
@@ -8741,7 +8741,35 @@ ADRESH=0X00;
 _delay((unsigned long)((100)*(64000000/4000.0)));
 }
 
+Power=Uout*Iout;
 
+if(Uin>12)
+{
+boost_pwm=0;
+CCPR2L=buck_pwm++;
+read_Iout();
+read_Uout();
+Power_new=Uout*Iout;
+if(Power_new>Power)
+{
+Power=Power_new;
+}
+else
+{
+CCPR2L=boost_pwm-2;
+read_Iout();
+read_Uout();
+Power_new=Uout*Iout;
+if(Power_new>Power)
+{
+Power=Power_new;
+}
+else
+{
+
+}
+}
+}
 
 }
 }

@@ -89,12 +89,11 @@ void pwm_init(float Uin)
     if(Uin>12)
     {
         boost_pwm=0;
-        boost=boost_pwm;
+        buck=boost_pwm;
 
     }
     else
     {
-        boost_pwm=0;
-        boost=boost_pwm;
+
     }
 }
