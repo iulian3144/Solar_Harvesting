@@ -8707,7 +8707,7 @@ Lcd_Clear();
 read_Uin();
 pwm_init(Uin);
 float Uin,Power,Power_new;
-int port,c,d;
+int port,c,d,buck_pwm,boost_pwm;
 
 
 while(1)
@@ -8764,12 +8764,7 @@ if(Power_new>Power)
 {
 Power=Power_new;
 }
-else
-{
-
 }
 }
-}
-
 }
 }

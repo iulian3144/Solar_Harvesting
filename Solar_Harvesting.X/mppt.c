@@ -18,7 +18,7 @@ int buck_pwm,boost_pwm;
 char str_V[8],str_A[8],str_P[8];
 float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
 
-void read_Iout(void)
+void read_Iout(void)//citire curent de iesire
 {
     ADCON0=0b00001011;//RA2
     __delay_ms(10);
@@ -30,7 +30,7 @@ void read_Iout(void)
     
 }
 
-void write_Iout(void)
+void write_Iout(void)//scriere pe display valoarea curentului de iesire
 {
     Lcd_Set_Cursor(2,1);
     Lcd_Write_String("I=");
@@ -41,7 +41,7 @@ void write_Iout(void)
 }
 
 
-void read_Uout(void)
+void read_Uout(void)//citire valoare tensinue de iesire
 {
     ADCON0=0b00000111;//RA1
     __delay_ms(10);
@@ -53,7 +53,7 @@ void read_Uout(void)
 
 }
 
-void write_Uout(void)
+void write_Uout(void)//scriere pe display valoarea tensinuii de iesire
 {
     Lcd_Set_Cursor(1,1);
     Lcd_Write_String("U=");
@@ -62,7 +62,7 @@ void write_Uout(void)
     Lcd_Write_String(str_V);
 }
 
-void read_Uin(void)
+void read_Uin(void)//citire valoare tensinue de intrare
 {
     ADCON0=0b00001111;//RA3
     __delay_ms(10);
@@ -74,7 +74,7 @@ void read_Uin(void)
    
 }
 
-void write_Uin(void)
+void write_Uin(void)//scriere pe display valoarea tensinuii de intrare
 {
     Lcd_Set_Cursor(1,9);
     Lcd_Write_String("Ui=");
