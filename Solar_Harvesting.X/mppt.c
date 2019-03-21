@@ -1,99 +1,110 @@
 /*
- * File:   MPPT.c
- * Author: Silviu
+ * File:   mppt.c
+ * Author: Silviu Chirica
  *
  * Created on March 12, 2019, 12:45 PM
  */
 
-
-#include <xc.h>
-#include <pic18f46k22.h>
 #include "bit_config.h"
 #include "config.h"
+#include <pic18f46k22.h>
 #include <stdio.h>
-#define  buck  CCPR2L
-#define  boost CCPR1L
-int buck_pwm,boost_pwm;
+#include <xc.h>
 
-char str_V[8],str_A[8],str_P[8];
-float rez_adc_A,tens_A,Iout,rez_adc_U,tens,Uout,Uin;
-
-void read_Iout(void)//citire curent de iesire
-{
-    ADCON0=0b00001011;//RA2
+/*
+ * Citeste valoarea curentului de iesire.
+ */
+float read_Iout(void) {
+    float adcA_resolution = ADRESH;
+    ADCON0 = 0b00001011; // RA2
     __delay_ms(10);
-    ADCON0bits.GO=1;
+    ADCON0bits.GO = 1;
     __delay_ms(100);
-    rez_adc_A=ADRESH;
-    tens_A=rez_adc_A*0.0181372549019608;
-    Iout=tens_A;
-    
+    tens_A = adcA_resolution * 0.0181372549019608; // should be optimized
+
+    return tens_A;
 }
 
-void write_Iout(void)//scriere pe display valoarea curentului de iesire
-{
-    Lcd_Set_Cursor(2,1);
-    Lcd_Write_String("I=");
-    sprintf(str_A, "%.2f", Iout);
-    Lcd_Set_Cursor(2,3);
-    Lcd_Write_String(str_A);
-    Lcd_Write_String(" A");
-}
-
-
-void read_Uout(void)//citire valoare tensinue de iesire
-{
-    ADCON0=0b00000111;//RA1
+/*
+ * Citeste valoarea tensiunii de iesire.
+ */
+float read_Uout(void) {
+    float voltage = 0;
+    ADCON0 = 0b00000111; // RA1
     __delay_ms(10);
-    ADCON0bits.GO=1;
+    ADCON0bits.GO = 1;
     __delay_ms(100);
-    rez_adc_U=ADRESH;
-    tens=rez_adc_U*0.01953125;
-    Uout=tens/0.25;
+    rez_adc_U = ADRESH;
+    voltage = rez_adc_U * 0.01953125;
+    output_voltage = voltage / 0.25;
 
+    return output_voltage;
 }
 
-void write_Uout(void)//scriere pe display valoarea tensinuii de iesire
-{
-    Lcd_Set_Cursor(1,1);
-    Lcd_Write_String("U=");
-    sprintf(str_V, "%.2f", Uout);
-    Lcd_Set_Cursor(1,3);
-    Lcd_Write_String(str_V);
-}
-
-void read_Uin(void)//citire valoare tensinue de intrare
-{
-    ADCON0=0b00001111;//RA3
+/*
+ * Citeste valoarea tensiunii de intrare.
+ * @return valoarea tensiunii de intrare
+ */
+float read_Uin(void) {
+    float voltage;
+    float input_voltage = 0;
+    ADCON0 = 0b00001111; // RA3
     __delay_ms(10);
-    ADCON0bits.GO=1;
+    ADCON0bits.GO = 1;
     __delay_ms(100);
-    rez_adc_U=ADRESH;
-    tens=rez_adc_U*0.01953125;
-    Uin=tens/0.2;
-   
+    rez_adc_U = ADRESH;
+    voltage = rez_adc_U * 0.01953125;
+    input_voltage = voltage * 5;    // avoid using division
+                                    // multiplication is easier for processors
+
+    return input_voltage;
 }
 
-void write_Uin(void)//scriere pe display valoarea tensinuii de intrare
-{
-    Lcd_Set_Cursor(1,9);
-    Lcd_Write_String("Ui=");
-    sprintf(str_V, "%.2f", Uin);
-    Lcd_Set_Cursor(1,12);
-    Lcd_Write_String(str_V);
-    Lcd_Write_String(" V");
+/*
+ * Afiseaza pe display valoarea curentului de iesire.
+ * @param output_amperage valoarea curentului de iesire
+ */
+void write_Iout(float output_amperage) {
+    char amperage_text[9] = {0}; // 8 chars + end of string
+    Lcd_Set_Cursor(2, 1);
+    snprintf(amperage_text, 16, "Iout: %.2fA", output_amperage);
+    Lcd_Write_String(amperage_text);
 }
 
-void pwm_init(float Uin)
-{
-    if(Uin>12)
-    {
-        boost_pwm=0;
-        buck=boost_pwm;
+/*
+ * Afiseaza pe display valoarea tensiunii de iesire.
+ * 1234567812345678
+ * U=12.34
+ * @param output_voltage valoare tensiunii de iesire
+ */
+void write_Uout(float output_voltage) {
+    char voltage_text[9] = {0};
+    Lcd_Set_Cursor(1, 1);
+    snprintf(voltage_text, 8, "U=%.2f", output_voltage);
+    Lcd_Write_String(voltage_text);
+}
 
-    }
-    else
-    {
+/*
+ * Afiseaza pe display valoarea tensiunii de intrare.
+ * 1234567812345678
+ *         Ui=12.34
+ * @param input_voltage valoare tensiunii de intrare
+ */
+void write_Uin(float input_voltage) {
+    char voltage_text[9] = {0}; // 8 chars + end of string
+    Lcd_Set_Cursor(1, 9);
+    snprintf(voltage_text, 8, "Ui=%.2f", input_voltage);
+    Lcd_Write_String(voltage_text);
+}
 
+/*
+ * Initializeaza PWM.
+ * @param input_voltage valoare tensiunii de intrare
+ * @param boost_pwm
+ */
+void pwm_init(float input_voltage, int *boost_pwm) {
+    if (input_voltage > 12) {
+        *boost_pwm = 0;
+        buck = *boost_pwm;
     }
 }
