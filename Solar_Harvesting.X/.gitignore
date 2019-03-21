@@ -1,0 +1,7 @@
+build/
+dist/
+nbproject/Makefile-*
+nbproject/Package-*
+nbproject/private/
+
+# reference: http://microchipdeveloper.com/faq:72
